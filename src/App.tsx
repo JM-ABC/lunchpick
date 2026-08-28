@@ -169,10 +169,7 @@ const App: React.FC = () => {
                     {dailyRecommend && (
                       <div className="space-y-6">
                         <div className="p-8 bg-[#f9f9f9] rounded-3xl border border-black/5">
-                          <p className="text-xl font-medium text-[#757575] italic leading-relaxed">
-                            "{dailyRecommend.comment}"
-                          </p>
-                          <div className="mt-6 pt-6 border-t border-black/5 flex items-center justify-between">
+                          <div className="flex items-center justify-between">
                             <div>
                               <h3 className="text-3xl font-bold">{dailyRecommend.name}</h3>
                               <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance}</p>
@@ -314,7 +311,6 @@ const App: React.FC = () => {
                             <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest">{getWinner()?.category}</span>
                             <h4 className="text-6xl sm:text-8xl font-black tracking-tighter">{getWinner()?.name}</h4>
                           </div>
-                          <p className="text-xl text-[#757575] font-medium italic">"{getCommentForRestaurant(getWinner())}"</p>
                         </div>
                         
                         <div className="pt-12 border-t border-black/5 flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -494,21 +490,5 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-function getCommentForRestaurant(restaurant: any) {
-  if (!restaurant) return "";
-  const RECOMMENDATION_COMMENTS: Record<string, string[]> = {
-    '한식': ['든든한 한 끼로 오후 업무도 화이팅!', '한국인은 역시 밥심이죠.', '정갈하고 깔끔한 한식 한 상.'],
-    '중식': ['스트레스 풀리는 매콤한 짬뽕 어때요?', '짜장면과 탕수육의 완벽한 조화.', '딤섬과 함께 즐기는 홍콩의 맛.'],
-    '일식': ['깔끔하고 담백한 일식으로 점심 해결!', '신선한 재료로 만든 스시 한 점.', '따뜻한 라멘 국물이 생각나는 날.'],
-    '양식': ['분위기 있게 즐기는 파스타와 스테이크.', '벚꽃과 어울리는 이탈리안 레스토랑.', '가볍게 즐기는 브런치 타임.'],
-    '분식': ['추억의 맛, 매콤달콤한 떡볶이.', '간편하지만 확실한 행복, 분식 타임.', '바삭한 튀김과 순대의 환상 곱합.'],
-    '아시안': ['이국적인 향신료의 매력에 빠져보세요.', '베트남 쌀국수로 시원하게 해장!', '태국 요리의 다채로운 맛.'],
-    '기타': ['오늘따라 특별한 메뉴가 당긴다면?', '새로운 맛의 세계로 초대합니다.', '실패 없는 오늘의 추천 메뉴.'],
-  };
-  const category = Object.keys(RECOMMENDATION_COMMENTS).find(c => restaurant.category.includes(c)) || '기타';
-  const comments = RECOMMENDATION_COMMENTS[category];
-  return comments[Math.floor(Math.random() * comments.length)];
-}
 
 export default App;

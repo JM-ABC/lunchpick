@@ -53,22 +53,6 @@ let RESTAURANTS = [
   { id: '45', name: '딤딤섬', category: '중식/딤섬', rating: 4.3, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
 ];
 
-const RECOMMENDATION_COMMENTS: Record<string, string[]> = {
-  '한식': ['든든한 한 끼로 오후 업무도 화이팅!', '한국인은 역시 밥심이죠.', '정갈하고 깔끔한 한식 한 상.'],
-  '중식': ['스트레스 풀리는 매콤한 짬뽕 어때요?', '짜장면과 탕수육의 완벽한 조화.', '딤섬과 함께 즐기는 홍콩의 맛.'],
-  '일식': ['깔끔하고 담백한 일식으로 점심 해결!', '신선한 재료로 만든 스시 한 점.', '따뜻한 라멘 국물이 생각나는 날.'],
-  '양식': ['분위기 있게 즐기는 파스타와 스테이크.', '벚꽃과 어울리는 이탈리안 레스토랑.', '가볍게 즐기는 브런치 타임.'],
-  '분식': ['추억의 맛, 매콤달콤한 떡볶이.', '간편하지만 확실한 행복, 분식 타임.', '바삭한 튀김과 순대의 환상 궁합.'],
-  '아시안': ['이국적인 향신료의 매력에 빠져보세요.', '베트남 쌀국수로 시원하게 해장!', '태국 요리의 다채로운 맛.'],
-  '기타': ['오늘따라 특별한 메뉴가 당긴다면?', '새로운 맛의 세계로 초대합니다.', '실패 없는 오늘의 추천 메뉴.'],
-};
-
-function getCommentForRestaurant(restaurant: any) {
-  const category = Object.keys(RECOMMENDATION_COMMENTS).find(c => restaurant.category.includes(c)) || '기타';
-  const comments = RECOMMENDATION_COMMENTS[category];
-  return comments[Math.floor(Math.random() * comments.length)];
-}
-
 app.use(express.json());
 
 // 단일 팀 상태 관리
@@ -201,8 +185,7 @@ function broadcast(message: any) {
 // API Routes
 app.get('/api/daily-recommend', (req, res) => {
   const randomRestaurant = RESTAURANTS[Math.floor(Math.random() * RESTAURANTS.length)];
-  const comment = getCommentForRestaurant(randomRestaurant);
-  res.json({ ...randomRestaurant, comment });
+  res.json(randomRestaurant);
 });
 
 app.get('/api/recommend', (req, res) => {
