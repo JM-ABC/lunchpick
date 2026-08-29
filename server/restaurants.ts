@@ -27,7 +27,6 @@ export const RESTAURANTS = [
   { id: '27', name: '사이드쇼', category: '분식/떡볶이', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '28', name: '리틀사이공', category: '베트남음식', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '29', name: '강가', category: '인도음식', rating: 4.3, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '30', name: '피에프창', category: '아시안 퓨전', rating: 4.4, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
   { id: '31', name: '베테랑칼국수', category: '한식/칼국수', rating: 4.2, price: '₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '32', name: '라 세느 (La Seine)', category: '호텔뷔페', rating: 4.3, price: '₩₩₩₩', distance: '롯데호텔', isSoloFriendly: false },
   { id: '33', name: '땀땀', category: '베트남음식', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
