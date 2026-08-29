@@ -9,7 +9,7 @@ export const RESTAURANTS = [
   { id: '7', name: '하이디라오 훠궈', category: '중식/훠궈', rating: 4.8, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
   { id: '8', name: '바이킹스 워프', category: '해산물 뷔페', rating: 4.7, price: '₩₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
   { id: '10', name: '해목', category: '일식/덮밥', rating: 4.3, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '11', name: '오레노라멘', category: '일식/라멘', rating: 4.4, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '11', name: '오레노라멘 롯데월드몰점', category: '일식/라멘', rating: 4.4, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '12', name: '치즈룸&테이스팅룸', category: '양식', rating: 4.6, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
   { id: '13', name: '갓덴스시', category: '일식/스시', rating: 4.5, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '14', name: '빌즈 (Bills)', category: '양식/브런치', rating: 4.2, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
@@ -41,7 +41,8 @@ export const RESTAURANTS = [
   { id: '47', name: '디라이프스타일키친', category: '양식/파스타', rating: 4.4, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '48', name: '서령 롯데월드몰점', category: '한식/냉면', rating: 4.5, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '49', name: '오사이초밥 잠실송리단길점', category: '일식/스시 오마카세', rating: 4.5, price: '₩₩', distance: '송리단길', isSoloFriendly: true },
-  { id: '50', name: '펙 (Peck)', category: '이탈리안/피자', rating: 4.3, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
   { id: '51', name: '크리스탈제이드', category: '중식/상하이요리', rating: 4.3, price: '₩₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
   { id: '52', name: '엠스테이크하우스', category: '양식/스테이크', rating: 4.3, price: '₩₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
+  { id: '53', name: '렌위치 롯데월드몰점', category: '샌드위치/샐러드', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '54', name: '마루가메우동 롯데월드몰점', category: '일식/우동', rating: 4.3, price: '₩', distance: '롯데월드몰', isSoloFriendly: true },
 ];
