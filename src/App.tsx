@@ -167,10 +167,10 @@ const App: React.FC = () => {
 
                   {dailyRecommend && (
                     <div className="space-y-6">
-                      <div className="p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
+                      <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
                         <div className="flex items-center justify-between">
                           <div>
-                            <h3 className="text-4xl font-bold">{dailyRecommend.name}</h3>
+                            <h3 className="text-2xl sm:text-4xl font-bold">{dailyRecommend.name}</h3>
                             <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance}</p>
                           </div>
                           <div className="flex items-center gap-1 bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
