@@ -155,51 +155,39 @@ const App: React.FC = () => {
             >
               {/* Daily Recommendation */}
               <section className="relative overflow-hidden bg-white border border-black/5 rounded-[40px] p-8 sm:p-16 shadow-sm">
-                <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-8">
-                    <div className="space-y-4">
-                      <span className="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full uppercase tracking-widest">
-                        Today's Pick
-                      </span>
-                      <h2 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
-                        오늘의<br />추천 메뉴
-                      </h2>
-                    </div>
-                    
-                    {dailyRecommend && (
-                      <div className="space-y-6">
-                        <div className="p-8 bg-[#f9f9f9] rounded-3xl border border-black/5">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <h3 className="text-3xl font-bold">{dailyRecommend.name}</h3>
-                              <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance}</p>
-                            </div>
-                            <div className="flex items-center gap-1 bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
-                              <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                              <span className="font-bold">{dailyRecommend.rating}</span>
-                            </div>
+                <div className="relative z-10 max-w-2xl space-y-8">
+                  <div className="space-y-4">
+                    <span className="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full uppercase tracking-widest">
+                      Today's Pick
+                    </span>
+                    <h2 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
+                      오늘의<br />추천 메뉴
+                    </h2>
+                  </div>
+
+                  {dailyRecommend && (
+                    <div className="space-y-6">
+                      <div className="p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h3 className="text-4xl font-bold">{dailyRecommend.name}</h3>
+                            <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance}</p>
+                          </div>
+                          <div className="flex items-center gap-1 bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
+                            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                            <span className="font-bold">{dailyRecommend.rating}</span>
                           </div>
                         </div>
-                        <button
-                          onClick={() => fetch('/api/daily-recommend').then(res => res.json()).then(data => setDailyRecommend(data))}
-                          className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
-                        >
-                          <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
-                          다른 메뉴 추천받기
-                        </button>
                       </div>
-                    )}
-                  </div>
-                  
-                  <div className="relative aspect-square rounded-[32px] overflow-hidden bg-emerald-50">
-                    <img 
-                      src={`https://picsum.photos/seed/${(dailyRecommend?.category || 'food').replace(/\//g, '-')}/800/800`}
-                      alt="Food"
-                      className="w-full h-full object-cover mix-blend-multiply opacity-80"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 to-transparent" />
-                  </div>
+                      <button
+                        onClick={() => fetch('/api/daily-recommend').then(res => res.json()).then(data => setDailyRecommend(data))}
+                        className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                        다른 메뉴 추천받기
+                      </button>
+                    </div>
+                  )}
                 </div>
               </section>
             </motion.div>
