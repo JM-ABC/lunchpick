@@ -123,7 +123,7 @@ const App: React.FC = () => {
             <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-200">
               <Utensils className="text-white w-6 h-6" />
             </div>
-            <h1 className="text-2xl font-black tracking-tighter italic">LUNCHPICK</h1>
+            <h1 className="text-2xl font-black tracking-tighter">LUNCHPICK</h1>
           </div>
           
           <nav className="flex bg-black/5 p-1 rounded-2xl">
