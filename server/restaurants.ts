@@ -41,4 +41,7 @@ export const RESTAURANTS = [
   { id: '47', name: '디라이프스타일키친', category: '양식/파스타', rating: 4.4, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '48', name: '서령 롯데월드몰점', category: '한식/냉면', rating: 4.5, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '49', name: '오사이초밥 잠실송리단길점', category: '일식/스시 오마카세', rating: 4.5, price: '₩₩', distance: '송리단길', isSoloFriendly: true },
+  { id: '50', name: '펙 (Peck)', category: '이탈리안/피자', rating: 4.3, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
+  { id: '51', name: '크리스탈제이드', category: '중식/상하이요리', rating: 4.3, price: '₩₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
+  { id: '52', name: '엠스테이크하우스', category: '양식/스테이크', rating: 4.3, price: '₩₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
 ];
