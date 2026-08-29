@@ -193,7 +193,7 @@ const App: React.FC = () => {
                   
                   <div className="relative aspect-square rounded-[32px] overflow-hidden bg-emerald-50">
                     <img 
-                      src={`https://picsum.photos/seed/${dailyRecommend?.category || 'food'}/800/800`} 
+                      src={`https://picsum.photos/seed/${(dailyRecommend?.category || 'food').replace(/\//g, '-')}/800/800`}
                       alt="Food"
                       className="w-full h-full object-cover mix-blend-multiply opacity-80"
                       referrerPolicy="no-referrer"
