@@ -170,20 +170,20 @@ const App: React.FC = () => {
                     <span className="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full uppercase tracking-widest">
                       Today's Pick
                     </span>
-                    <h2 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
-                      오늘의<br />추천 식당
+                    <h2 className="text-3xl sm:text-7xl font-black tracking-tight leading-[1.05]">
+                      오늘의 추천 식당
                     </h2>
                   </div>
 
                   {dailyRecommend && (
                     <div className="space-y-6">
                       <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h3 className="text-2xl sm:text-4xl font-bold">{dailyRecommend.name}</h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+                          <div className="min-w-0">
+                            <h3 className="text-xl sm:text-4xl font-bold break-keep">{dailyRecommend.name}</h3>
                             <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance}</p>
                           </div>
-                          <div className="flex items-center gap-1 bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
+                          <div className="flex items-center gap-1 self-start sm:self-auto bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
                             <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                             <span className="font-bold">{dailyRecommend.rating}</span>
                           </div>
@@ -216,20 +216,20 @@ const App: React.FC = () => {
                     <span className="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full uppercase tracking-widest">
                       Today's Pick
                     </span>
-                    <h2 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
-                      오늘의<br />추천 카페
+                    <h2 className="text-3xl sm:text-7xl font-black tracking-tight leading-[1.05]">
+                      오늘의 추천 카페
                     </h2>
                   </div>
 
                   {dailyCafeRecommend && (
                     <div className="space-y-6">
                       <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h3 className="text-2xl sm:text-4xl font-bold">{dailyCafeRecommend.name}</h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+                          <div className="min-w-0">
+                            <h3 className="text-xl sm:text-4xl font-bold break-keep">{dailyCafeRecommend.name}</h3>
                             <p className="text-[#9e9e9e] font-medium">{dailyCafeRecommend.category} • {dailyCafeRecommend.distance}</p>
                           </div>
-                          <div className="flex items-center gap-1 bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
+                          <div className="flex items-center gap-1 self-start sm:self-auto bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
                             <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                             <span className="font-bold">{dailyCafeRecommend.rating}</span>
                           </div>
