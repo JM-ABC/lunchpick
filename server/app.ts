@@ -2,50 +2,9 @@ import express from 'express';
 import { createServer, type Server } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
 import { nanoid } from 'nanoid';
+import { RESTAURANTS } from './restaurants.js';
 
 export const WS_PATH = '/api/ws';
-
-// 잠실 롯데월드몰/백화점 맛집 데이터
-let RESTAURANTS = [
-  { id: '1', name: '유미분분식', category: '분식', rating: 4.4, price: '₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '2', name: '만옥', category: '중식', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '3', name: '쌤쌤쌤 (Sam Sam Sam)', category: '양식', rating: 4.7, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '4', name: '포브라더스', category: '아시안', rating: 4.5, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '5', name: '고봉삼계탕', category: '한식', rating: 4.6, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '6', name: '구워주는집', category: '고기/구이', rating: 4.5, price: '₩₩', distance: '롯데백화점', isSoloFriendly: false },
-  { id: '7', name: '하이디라오 훠궈', category: '중식/훠궈', rating: 4.8, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '8', name: '바이킹스 워프', category: '해산물 뷔페', rating: 4.7, price: '₩₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '10', name: '해목', category: '일식/덮밥', rating: 4.3, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '11', name: '오레노라멘', category: '일식/라멘', rating: 4.4, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '12', name: '치즈룸&테이스팅룸', category: '양식', rating: 4.6, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '13', name: '갓덴스시', category: '일식/스시', rating: 4.5, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '14', name: '빌즈 (Bills)', category: '양식/브런치', rating: 4.2, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '15', name: '온더보더', category: '멕시칸', rating: 4.1, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '16', name: '피에프창', category: '중식/아시안', rating: 4.3, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '17', name: '칸다소바', category: '일식/마제소바', rating: 4.5, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '18', name: '브루클린 더 버거 조인트', category: '양식/버거', rating: 4.4, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '19', name: '쉑쉑버거', category: '양식/버거', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '20', name: '아그라', category: '인도음식', rating: 4.4, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '21', name: '스페인클럽', category: '스페인음식', rating: 4.1, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '22', name: '차이797', category: '중식', rating: 4.2, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '23', name: '부탄츄', category: '일식/라멘', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '25', name: '미미네', category: '분식', rating: 4.1, price: '₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '26', name: '코코이찌방야', category: '일식/카레', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '27', name: '사이드쇼', category: '분식/떡볶이', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '28', name: '리틀사이공', category: '베트남음식', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '29', name: '강가', category: '인도음식', rating: 4.3, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '30', name: '피에프창', category: '아시안 퓨전', rating: 4.4, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
-  { id: '31', name: '베테랑칼국수', category: '한식/칼국수', rating: 4.2, price: '₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '32', name: '라 세느 (La Seine)', category: '호텔뷔페', rating: 4.3, price: '₩₩₩₩', distance: '롯데호텔', isSoloFriendly: false },
-  { id: '33', name: '땀땀', category: '베트남음식', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '34', name: '한국집', category: '한식/비빔밥', rating: 4.0, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '35', name: '마즈야', category: '일식/돈까스', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '36', name: '봉피양', category: '한식/냉면', rating: 4.4, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '37', name: '다이치', category: '일식/돈까스', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '41', name: '대치동함흥면옥', category: '한식/냉면', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '43', name: '촙촙 (Chop Chop)', category: '아시안/베트남', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '45', name: '딤딤섬', category: '중식/딤섬', rating: 4.3, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-];
 
 interface TeamState {
   status: 'waiting' | 'voting' | 'done';
