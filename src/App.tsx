@@ -118,24 +118,24 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-[#f5f5f5] text-[#141414] font-sans selection:bg-emerald-100 selection:text-emerald-900">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-black/5">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="max-w-7xl mx-auto px-6 py-4 sm:h-20 sm:py-0 flex flex-col sm:flex-row items-center gap-4 sm:gap-0 sm:justify-between">
+          <div className="flex items-center gap-2 self-start sm:self-auto">
             <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-200">
               <Utensils className="text-white w-6 h-6" />
             </div>
             <h1 className="text-2xl font-black tracking-tighter">LUNCHPICK</h1>
           </div>
-          
-          <nav className="flex bg-black/5 p-1 rounded-2xl">
-            <button 
+
+          <nav className="flex w-full sm:w-auto bg-black/5 p-1 rounded-2xl">
+            <button
               onClick={() => setActiveTab('solo')}
-              className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'solo' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
+              className={`flex-1 sm:flex-none px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'solo' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
             >
               혼밥 추천
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('team')}
-              className={`px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'team' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
+              className={`flex-1 sm:flex-none px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'team' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
             >
               팀 투표
             </button>
