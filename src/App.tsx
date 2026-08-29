@@ -202,7 +202,7 @@ const App: React.FC = () => {
               {teamState && (
                 <div className="grid lg:grid-cols-[350px_1fr] gap-8 items-start">
                   {/* Sidebar: PC View */}
-                  <aside className="lg:sticky lg:top-32 space-y-6">
+                  <aside className="order-2 lg:order-none lg:sticky lg:top-32 space-y-6">
                     <div className="bg-white border border-black/5 rounded-[32px] p-8 shadow-sm space-y-8">
                       <div className="space-y-2">
                         <h3 className="text-xl font-bold">투표 관리</h3>
@@ -234,7 +234,7 @@ const App: React.FC = () => {
                   </aside>
 
                   {/* Main Content */}
-                  <div className="space-y-8">
+                  <div className="order-1 lg:order-none space-y-8">
                     {/* Add Restaurant: Horizontal Bar for PC */}
                     {teamState.status === 'voting' && (
                       <div className="bg-white border border-black/5 rounded-[32px] p-6 shadow-sm">
