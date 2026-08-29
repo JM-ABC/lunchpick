@@ -39,7 +39,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (activeTab === 'team' && !socketRef.current) {
       const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const socket = new WebSocket(`${protocol}//${window.location.host}`);
+      const socket = new WebSocket(`${protocol}//${window.location.host}/api/ws`);
       socketRef.current = socket;
 
       socket.onopen = () => {
