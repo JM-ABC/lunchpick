@@ -180,9 +180,9 @@ const App: React.FC = () => {
                             </div>
                           </div>
                         </div>
-                        <button 
+                        <button
                           onClick={() => fetch('/api/daily-recommend').then(res => res.json()).then(data => setDailyRecommend(data))}
-                          className="group flex items-center gap-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                          className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
                         >
                           <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
                           다른 메뉴 추천받기
@@ -480,10 +480,10 @@ const App: React.FC = () => {
       <footer className="max-w-7xl mx-auto px-6 py-12 border-t border-black/5">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
           <p className="text-sm font-bold text-[#9e9e9e]">© 2026 LUNCHPICK. All rights reserved.</p>
-          <div className="flex gap-8">
-            <a href="#" className="text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Privacy</a>
-            <a href="#" className="text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Terms</a>
-            <a href="#" className="text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Contact</a>
+          <div className="flex gap-8 -my-3">
+            <a href="#" className="py-3 text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Privacy</a>
+            <a href="#" className="py-3 text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Terms</a>
+            <a href="#" className="py-3 text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Contact</a>
           </div>
         </div>
       </footer>
