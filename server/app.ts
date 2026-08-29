@@ -3,6 +3,7 @@ import { createServer, type Server } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
 import { nanoid } from 'nanoid';
 import { RESTAURANTS } from './restaurants.js';
+import { CAFES } from './cafes.js';
 
 export const WS_PATH = '/api/ws';
 
@@ -141,6 +142,11 @@ export function createApp(): { app: express.Express; server: Server } {
   app.get('/api/daily-recommend', (req, res) => {
     const randomRestaurant = RESTAURANTS[Math.floor(Math.random() * RESTAURANTS.length)];
     res.json(randomRestaurant);
+  });
+
+  app.get('/api/daily-cafe-recommend', (req, res) => {
+    const randomCafe = CAFES[Math.floor(Math.random() * CAFES.length)];
+    res.json(randomCafe);
   });
 
   app.get('/api/recommend', (req, res) => {

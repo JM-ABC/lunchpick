@@ -19,8 +19,9 @@ import {
 import { TeamState, ServerMessage } from './types';
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'solo' | 'team'>('solo');
+  const [activeTab, setActiveTab] = useState<'solo' | 'cafe' | 'team'>('solo');
   const [dailyRecommend, setDailyRecommend] = useState<any>(null);
+  const [dailyCafeRecommend, setDailyCafeRecommend] = useState<any>(null);
   const [teamState, setTeamState] = useState<TeamState | null>(null);
   const [userId, setUserId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
@@ -34,6 +35,9 @@ const App: React.FC = () => {
     fetch('/api/daily-recommend')
       .then(res => res.json())
       .then(data => setDailyRecommend(data));
+    fetch('/api/daily-cafe-recommend')
+      .then(res => res.json())
+      .then(data => setDailyCafeRecommend(data));
   }, []);
 
   useEffect(() => {
@@ -131,13 +135,19 @@ const App: React.FC = () => {
               onClick={() => setActiveTab('solo')}
               className={`flex-1 sm:flex-none px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'solo' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
             >
-              혼밥 추천
+              밥집추천
+            </button>
+            <button
+              onClick={() => setActiveTab('cafe')}
+              className={`flex-1 sm:flex-none px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'cafe' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
+            >
+              카페추천
             </button>
             <button
               onClick={() => setActiveTab('team')}
               className={`flex-1 sm:flex-none px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'team' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
             >
-              팀 투표
+              팀투표
             </button>
           </nav>
         </div>
@@ -161,7 +171,7 @@ const App: React.FC = () => {
                       Today's Pick
                     </span>
                     <h2 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
-                      오늘의<br />추천 메뉴
+                      오늘의<br />추천 식당
                     </h2>
                   </div>
 
@@ -191,8 +201,54 @@ const App: React.FC = () => {
                 </div>
               </section>
             </motion.div>
+          ) : activeTab === 'cafe' ? (
+            <motion.div
+              key="cafe"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="space-y-12"
+            >
+              {/* Daily Cafe Recommendation */}
+              <section className="relative overflow-hidden bg-white border border-black/5 rounded-[40px] p-8 sm:p-16 shadow-sm">
+                <div className="relative z-10 max-w-2xl space-y-8">
+                  <div className="space-y-4">
+                    <span className="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full uppercase tracking-widest">
+                      Today's Pick
+                    </span>
+                    <h2 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
+                      오늘의<br />추천 카페
+                    </h2>
+                  </div>
+
+                  {dailyCafeRecommend && (
+                    <div className="space-y-6">
+                      <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h3 className="text-2xl sm:text-4xl font-bold">{dailyCafeRecommend.name}</h3>
+                            <p className="text-[#9e9e9e] font-medium">{dailyCafeRecommend.category} • {dailyCafeRecommend.distance}</p>
+                          </div>
+                          <div className="flex items-center gap-1 bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
+                            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                            <span className="font-bold">{dailyCafeRecommend.rating}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => fetch('/api/daily-cafe-recommend').then(res => res.json()).then(data => setDailyCafeRecommend(data))}
+                        className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                        다른 카페 추천받기
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </section>
+            </motion.div>
           ) : (
-            <motion.div 
+            <motion.div
               key="team"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
