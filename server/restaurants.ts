@@ -37,4 +37,7 @@ export const RESTAURANTS = [
   { id: '41', name: '대치동함흥면옥', category: '한식/냉면', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '43', name: '촙촙 (Chop Chop)', category: '아시안/베트남', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '45', name: '딤딤섬', category: '중식/딤섬', rating: 4.3, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '46', name: '런던 베이글 뮤지엄 잠실점', category: '베이커리/브런치', rating: 4.5, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '47', name: '디라이프스타일키친', category: '양식/파스타', rating: 4.4, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '48', name: '서령 롯데월드몰점', category: '한식/냉면', rating: 4.5, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
 ];
