@@ -161,7 +161,7 @@ const App: React.FC = () => {
                       <span className="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full uppercase tracking-widest">
                         Today's Pick
                       </span>
-                      <h2 className="text-5xl sm:text-7xl font-black tracking-tight leading-[0.9]">
+                      <h2 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.05]">
                         오늘의<br />추천 메뉴
                       </h2>
                     </div>
@@ -283,7 +283,7 @@ const App: React.FC = () => {
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
                       <div className="space-y-2">
                         <span className="text-xs font-bold text-emerald-600 uppercase tracking-widest">Team Decision</span>
-                        <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-none">
+                        <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight">
                           {teamState.status === 'done' ? '투표 결과' : '오늘의 점심 메뉴 투표'}
                         </h2>
                       </div>
@@ -353,7 +353,7 @@ const App: React.FC = () => {
                               </div>
                               
                               <div className="space-y-2 mt-auto">
-                                <h4 className="text-2xl font-black tracking-tight leading-none">{restaurant.name}</h4>
+                                <h4 className="text-2xl font-black tracking-tight leading-tight">{restaurant.name}</h4>
                                 <p className={`text-sm font-medium ${isVoted ? 'text-emerald-100' : 'text-[#9e9e9e]'}`}>
                                   {restaurant.distance} • ⭐ {restaurant.rating}
                                 </p>
