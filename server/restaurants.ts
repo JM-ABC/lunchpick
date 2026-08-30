@@ -68,4 +68,12 @@ export const RESTAURANTS = [
   { id: '78', name: '고복 롯데백화점 잠실점 캐슬플라자', category: '한식/냉면', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '79', name: '계도 롯데백화점 잠실', category: '일식/라멘', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '80', name: '삼우정 잠실본점', category: '한식/불고기', rating: 4.4, price: '₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
+  { id: '81', name: '큰기와집 잠실점', category: '한식/게장', rating: 4.5, price: '₩₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '82', name: '아웃백 스테이크하우스 잠실롯데점', category: '양식/스테이크', rating: 4.2, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
+  { id: '83', name: '매화쌈밥 롯데백화점 잠실점', category: '한식/쌈밥', rating: 4.3, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '84', name: '롯데월드 저자거리 주막', category: '한식', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '85', name: '킴스델리마켓 롯데백화점 잠실점', category: '샌드위치', rating: 4.3, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '86', name: '카렌 롯데백화점 잠실점', category: '대만음식/철판요리', rating: 4.3, price: '₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
+  { id: '87', name: '미즈컨테이너 롯데백화점 잠실점', category: '양식/이탈리안', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '88', name: '샤브보트', category: '한식/샤브샤브', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
 ];
