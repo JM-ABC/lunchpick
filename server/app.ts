@@ -116,18 +116,21 @@ export function createApp(): { app: express.Express; server: Server } {
         case 'FINISH_VOTING': {
           teamState.status = 'done';
 
-          const voteCounts: Record<string, number> = {};
+          // Map preserves true vote order; a plain object would reorder
+          // numeric-string keys (restaurant ids) ascending, silently
+          // favoring lower ids on ties instead of whoever got voted first.
+          const voteCounts = new Map<string, number>();
           Object.values(teamState.votes).forEach(rid => {
-            voteCounts[rid] = (voteCounts[rid] || 0) + 1;
+            voteCounts.set(rid, (voteCounts.get(rid) || 0) + 1);
           });
 
           let winnerId = '';
           let maxVotes = -1;
 
-          if (Object.keys(voteCounts).length === 0) {
+          if (voteCounts.size === 0) {
             winnerId = teamState.candidates[Math.floor(Math.random() * teamState.candidates.length)].id;
           } else {
-            Object.entries(voteCounts).forEach(([rid, count]) => {
+            voteCounts.forEach((count, rid) => {
               if (count > maxVotes) {
                 maxVotes = count;
                 winnerId = rid;
