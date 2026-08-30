@@ -20,4 +20,5 @@ export const CAFES = [
   { id: 'c19', name: '카페시나몬', category: '카페/베이커리', rating: 4.3, price: '₩₩', distance: '롯데월드몰' },
   { id: 'c20', name: '엔제리너스 샤롯데점', category: '카페', rating: 4.2, price: '₩₩', distance: '롯데월드몰' },
   { id: 'c21', name: '컨플릭트스토어', category: '카페/스페셜티커피', rating: 4.5, price: '₩₩₩', distance: '잠실역' },
+  { id: 'c22', name: '교토퍼펙트말차 잠실롯데월드몰점', category: '디저트/말차', rating: 4.4, price: '₩₩', distance: '롯데월드몰' },
 ];
