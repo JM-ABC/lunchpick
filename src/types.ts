@@ -9,7 +9,7 @@ export interface Restaurant {
 }
 
 export interface TeamState {
-  status: 'waiting' | 'voting' | 'done';
+  status: 'voting' | 'done';
   candidates: Restaurant[];
   votes: Record<string, string>;
   userNames: Record<string, string>;

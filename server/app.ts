@@ -9,7 +9,7 @@ import { GROUP_VENUES } from './group-venues.js';
 export const WS_PATH = '/api/ws';
 
 interface TeamState {
-  status: 'waiting' | 'voting' | 'done';
+  status: 'voting' | 'done';
   candidates: typeof RESTAURANTS;
   votes: Record<string, string>; // userId -> restaurantId
   userNames: Record<string, string>; // userId -> nickname
@@ -100,13 +100,8 @@ export function createApp(): { app: express.Express; server: Server } {
           broadcast({ type: 'STATE_UPDATED', state: teamState });
           break;
         }
-        case 'START_VOTING': {
-          teamState.status = 'voting';
-          broadcast({ type: 'STATE_UPDATED', state: teamState });
-          break;
-        }
-
         case 'SUBMIT_VOTE': {
+          if (teamState.status !== 'voting') break;
           const { restaurantId } = data;
           teamState.votes[userId] = restaurantId;
           broadcast({ type: 'STATE_UPDATED', state: teamState });
@@ -144,6 +139,7 @@ export function createApp(): { app: express.Express; server: Server } {
         }
 
         case 'ADD_CANDIDATE': {
+          if (teamState.status !== 'voting') break;
           const { name, category } = data;
           const newCandidate = {
             id: nanoid(5),
