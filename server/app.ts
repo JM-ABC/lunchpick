@@ -4,6 +4,7 @@ import { WebSocketServer, WebSocket } from 'ws';
 import { nanoid } from 'nanoid';
 import { RESTAURANTS } from './restaurants.js';
 import { CAFES } from './cafes.js';
+import { GROUP_VENUES } from './group-venues.js';
 
 export const WS_PATH = '/api/ws';
 
@@ -29,7 +30,6 @@ export function createApp(): { app: express.Express; server: Server } {
   const recentCafeIds: string[] = [];
   const recentGroupIds: string[] = [];
   const recentTeamCandidateIds: string[] = [];
-  const GROUP_FRIENDLY_RESTAURANTS = RESTAURANTS.filter(r => r.isGroupFriendly);
 
   function pickAvoidingRecent<T extends { id: string }>(pool: T[], recentIds: string[]): T {
     const candidates = pool.filter(item => !recentIds.includes(item.id));
@@ -149,8 +149,7 @@ export function createApp(): { app: express.Express; server: Server } {
             rating: 5.0,
             price: '₩₩',
             distance: '직접 입력',
-            isSoloFriendly: true,
-            isGroupFriendly: false
+            isSoloFriendly: true
           };
           teamState.candidates.push(newCandidate);
           broadcast({ type: 'STATE_UPDATED', state: teamState });
@@ -195,9 +194,9 @@ export function createApp(): { app: express.Express; server: Server } {
   });
 
   app.get('/api/daily-group-recommend', (req, res) => {
-    const restaurant = pickAvoidingRecent(GROUP_FRIENDLY_RESTAURANTS, recentGroupIds);
-    rememberRecent(recentGroupIds, restaurant.id, GROUP_RECENT_LIMIT);
-    res.json(restaurant);
+    const venue = pickAvoidingRecent(GROUP_VENUES, recentGroupIds);
+    rememberRecent(recentGroupIds, venue.id, GROUP_RECENT_LIMIT);
+    res.json(venue);
   });
 
   app.get('/api/recommend', (req, res) => {
@@ -216,8 +215,7 @@ export function createApp(): { app: express.Express; server: Server } {
       rating: 5.0,
       price: '₩₩',
       distance: distance || '직접 입력',
-      isSoloFriendly: true,
-      isGroupFriendly: false
+      isSoloFriendly: true
     };
     RESTAURANTS.push(newRes);
     res.json(newRes);
