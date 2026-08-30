@@ -32,13 +32,15 @@ const formatPrice = (price: string) => {
 };
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'solo' | 'cafe' | 'team'>('solo');
+  const [activeTab, setActiveTab] = useState<'solo' | 'cafe' | 'group' | 'team'>('solo');
   const [dailyRecommend, setDailyRecommend] = useState<any>(null);
   const [dailyRecommendError, setDailyRecommendError] = useState(false);
   const [restaurantCategories, setRestaurantCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [dailyCafeRecommend, setDailyCafeRecommend] = useState<any>(null);
   const [dailyCafeRecommendError, setDailyCafeRecommendError] = useState(false);
+  const [dailyGroupRecommend, setDailyGroupRecommend] = useState<any>(null);
+  const [dailyGroupRecommendError, setDailyGroupRecommendError] = useState(false);
   const [teamState, setTeamState] = useState<TeamState | null>(null);
   const [userId, setUserId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
@@ -70,9 +72,18 @@ const App: React.FC = () => {
       .catch(() => setDailyCafeRecommendError(true));
   };
 
+  const fetchDailyGroupRecommend = () => {
+    setDailyGroupRecommendError(false);
+    fetch('/api/daily-group-recommend')
+      .then(res => res.json())
+      .then(data => setDailyGroupRecommend(data))
+      .catch(() => setDailyGroupRecommendError(true));
+  };
+
   useEffect(() => {
     fetchDailyRecommend();
     fetchDailyCafeRecommend();
+    fetchDailyGroupRecommend();
     fetch('/api/restaurant-categories')
       .then(res => res.json())
       .then(data => setRestaurantCategories(data))
@@ -186,6 +197,12 @@ const App: React.FC = () => {
               className={`flex-1 sm:flex-none px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'cafe' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
             >
               카페추천
+            </button>
+            <button
+              onClick={() => setActiveTab('group')}
+              className={`flex-1 sm:flex-none px-6 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === 'group' ? 'bg-white shadow-sm text-emerald-600' : 'text-[#9e9e9e] hover:text-[#141414]'}`}
+            >
+              회식추천
             </button>
             <button
               onClick={() => setActiveTab('team')}
@@ -341,6 +358,75 @@ const App: React.FC = () => {
                       >
                         <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
                         다른 카페 추천받기
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5 animate-pulse">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+                        <div className="min-w-0 space-y-3 w-full">
+                          <div className="h-8 sm:h-10 w-2/3 bg-black/5 rounded-lg" />
+                          <div className="h-4 w-1/3 bg-black/5 rounded-lg" />
+                        </div>
+                        <div className="h-10 w-20 bg-black/5 rounded-2xl shrink-0" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </section>
+            </motion.div>
+          ) : activeTab === 'group' ? (
+            <motion.div
+              key="group"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="space-y-12"
+            >
+              {/* Daily Group Recommendation */}
+              <section className="relative overflow-hidden bg-white border border-black/5 rounded-[40px] p-8 sm:p-16 shadow-sm">
+                <div className="relative z-10 max-w-2xl space-y-8">
+                  <div className="space-y-4">
+                    <span className="inline-block px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full uppercase tracking-widest">
+                      Today's Pick
+                    </span>
+                    <h2 className="text-3xl sm:text-7xl font-black tracking-tight leading-[1.05]">
+                      오늘의 추천 회식장소
+                    </h2>
+                  </div>
+
+                  {dailyGroupRecommendError ? (
+                    <div className="space-y-6">
+                      <div className="p-6 sm:p-10 bg-red-50 rounded-3xl border border-red-100">
+                        <p className="text-red-600 font-medium">추천을 불러오지 못했어요. 다시 시도해주세요.</p>
+                      </div>
+                      <button
+                        onClick={fetchDailyGroupRecommend}
+                        className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                        다시 시도하기
+                      </button>
+                    </div>
+                  ) : dailyGroupRecommend ? (
+                    <div className="space-y-6">
+                      <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+                          <div className="min-w-0">
+                            <h3 className="text-xl sm:text-4xl font-bold break-keep">{dailyGroupRecommend.name}</h3>
+                            <p className="text-[#9e9e9e] font-medium">{dailyGroupRecommend.category} • {dailyGroupRecommend.distance} • {formatPrice(dailyGroupRecommend.price)}</p>
+                          </div>
+                          <div className="flex items-center gap-1 self-start sm:self-auto bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
+                            <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                            <span className="font-bold">{dailyGroupRecommend.rating}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        onClick={fetchDailyGroupRecommend}
+                        className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                        다른 회식장소 추천받기
                       </button>
                     </div>
                   ) : (

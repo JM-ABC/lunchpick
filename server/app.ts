@@ -23,10 +23,13 @@ export function createApp(): { app: express.Express; server: Server } {
 
   const RESTAURANT_RECENT_LIMIT = 5;
   const CAFE_RECENT_LIMIT = 2;
+  const GROUP_RECENT_LIMIT = 3;
   const TEAM_CANDIDATE_ROUNDS_REMEMBERED = 2;
   const recentRestaurantIds: string[] = [];
   const recentCafeIds: string[] = [];
+  const recentGroupIds: string[] = [];
   const recentTeamCandidateIds: string[] = [];
+  const GROUP_FRIENDLY_RESTAURANTS = RESTAURANTS.filter(r => r.isGroupFriendly);
 
   function pickAvoidingRecent<T extends { id: string }>(pool: T[], recentIds: string[]): T {
     const candidates = pool.filter(item => !recentIds.includes(item.id));
@@ -146,7 +149,8 @@ export function createApp(): { app: express.Express; server: Server } {
             rating: 5.0,
             price: '₩₩',
             distance: '직접 입력',
-            isSoloFriendly: true
+            isSoloFriendly: true,
+            isGroupFriendly: false
           };
           teamState.candidates.push(newCandidate);
           broadcast({ type: 'STATE_UPDATED', state: teamState });
@@ -190,6 +194,12 @@ export function createApp(): { app: express.Express; server: Server } {
     res.json(cafe);
   });
 
+  app.get('/api/daily-group-recommend', (req, res) => {
+    const restaurant = pickAvoidingRecent(GROUP_FRIENDLY_RESTAURANTS, recentGroupIds);
+    rememberRecent(recentGroupIds, restaurant.id, GROUP_RECENT_LIMIT);
+    res.json(restaurant);
+  });
+
   app.get('/api/recommend', (req, res) => {
     const soloFriendly = RESTAURANTS.filter(r => r.isSoloFriendly);
     const random = soloFriendly[Math.floor(Math.random() * soloFriendly.length)];
@@ -206,7 +216,8 @@ export function createApp(): { app: express.Express; server: Server } {
       rating: 5.0,
       price: '₩₩',
       distance: distance || '직접 입력',
-      isSoloFriendly: true
+      isSoloFriendly: true,
+      isGroupFriendly: false
     };
     RESTAURANTS.push(newRes);
     res.json(newRes);

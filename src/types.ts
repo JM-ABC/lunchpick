@@ -6,6 +6,7 @@ export interface Restaurant {
   price: string;
   distance: string;
   isSoloFriendly: boolean;
+  isGroupFriendly: boolean;
 }
 
 export interface TeamState {
