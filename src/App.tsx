@@ -18,6 +18,18 @@ import {
 } from 'lucide-react';
 import { TeamState, ServerMessage } from './types';
 
+const PRICE_LABELS: Record<string, string> = {
+  '₩': '1만원 이하',
+  '₩₩': '1~2만원대',
+  '₩₩₩': '2~3만원대',
+  '₩₩₩₩': '3만원 이상',
+};
+
+const formatPrice = (price: string) => {
+  const label = PRICE_LABELS[price];
+  return label ? `${price} (${label})` : price;
+};
+
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'solo' | 'cafe' | 'team'>('solo');
   const [dailyRecommend, setDailyRecommend] = useState<any>(null);
@@ -208,7 +220,7 @@ const App: React.FC = () => {
                         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
                           <div className="min-w-0">
                             <h3 className="text-xl sm:text-4xl font-bold break-keep">{dailyRecommend.name}</h3>
-                            <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance} • {dailyRecommend.price}</p>
+                            <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance} • {formatPrice(dailyRecommend.price)}</p>
                           </div>
                           <div className="flex items-center gap-1 self-start sm:self-auto bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
                             <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
@@ -277,7 +289,7 @@ const App: React.FC = () => {
                         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
                           <div className="min-w-0">
                             <h3 className="text-xl sm:text-4xl font-bold break-keep">{dailyCafeRecommend.name}</h3>
-                            <p className="text-[#9e9e9e] font-medium">{dailyCafeRecommend.category} • {dailyCafeRecommend.distance} • {dailyCafeRecommend.price}</p>
+                            <p className="text-[#9e9e9e] font-medium">{dailyCafeRecommend.category} • {dailyCafeRecommend.distance} • {formatPrice(dailyCafeRecommend.price)}</p>
                           </div>
                           <div className="flex items-center gap-1 self-start sm:self-auto bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
                             <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
@@ -459,7 +471,7 @@ const App: React.FC = () => {
                               <div className="space-y-2 mt-auto">
                                 <h4 className="text-2xl font-black tracking-tight leading-tight">{restaurant.name}</h4>
                                 <p className={`text-sm font-medium ${isVoted ? 'text-emerald-100' : 'text-[#9e9e9e]'}`}>
-                                  {restaurant.distance} • ⭐ {restaurant.rating} • {restaurant.price}
+                                  {restaurant.distance} • ⭐ {restaurant.rating} • {formatPrice(restaurant.price)}
                                 </p>
                               </div>
 
