@@ -59,4 +59,9 @@ export const RESTAURANTS = [
   { id: '66', name: '팬트리12 롯데월드타워점', category: '샌드위치', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '67', name: '난포 롯데월드몰', category: '한식', rating: 4.5, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
   { id: '68', name: '금수복국 잠실소피텔점', category: '한식/복어', rating: 4.4, price: '₩₩₩', distance: '잠실역', isSoloFriendly: true },
+  { id: '69', name: '방이순대국', category: '한식/순대국', rating: 4.3, price: '₩', distance: '방이동', isSoloFriendly: true },
+  { id: '70', name: '샛집남원추어탕', category: '한식/추어탕', rating: 4.4, price: '₩₩', distance: '방이동', isSoloFriendly: true },
+  { id: '71', name: '등촌샤브칼국수 방이본점', category: '한식/칼국수', rating: 4.4, price: '₩₩', distance: '방이동', isSoloFriendly: true },
+  { id: '72', name: '동대문닭한마리', category: '한식/닭한마리', rating: 4.2, price: '₩₩₩', distance: '방이동', isSoloFriendly: false },
+  { id: '73', name: '육전국밥 석촌호수점', category: '한식/국밥', rating: 4.4, price: '₩', distance: '석촌호수', isSoloFriendly: true },
 ];
