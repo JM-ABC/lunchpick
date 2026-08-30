@@ -14,7 +14,8 @@ import {
   CheckCircle2,
   ChevronRight,
   User,
-  MessageSquare
+  MessageSquare,
+  X
 } from 'lucide-react';
 import { TeamState, ServerMessage } from './types';
 
@@ -556,11 +557,18 @@ const App: React.FC = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm"
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="bg-white rounded-[40px] p-10 sm:p-16 w-full max-w-xl shadow-2xl space-y-10"
+              className="relative bg-white rounded-[40px] p-10 sm:p-16 w-full max-w-xl shadow-2xl space-y-10"
             >
+              <button
+                onClick={() => { setShowNicknamePrompt(false); setActiveTab('solo'); }}
+                aria-label="닫고 밥집추천으로 돌아가기"
+                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-10 h-10 flex items-center justify-center rounded-full text-[#9e9e9e] hover:bg-black/5 hover:text-[#141414] transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
               <div className="space-y-4 text-center">
                 <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6">
                   <User className="w-10 h-10 text-emerald-500" />
