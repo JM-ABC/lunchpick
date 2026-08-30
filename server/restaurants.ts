@@ -68,7 +68,7 @@ export const RESTAURANTS = [
   { id: '75', name: '이태리부대찌개 잠실역점', category: '한식/부대찌개', rating: 4.2, price: '₩₩', distance: '잠실역', isSoloFriendly: false },
   { id: '76', name: '수가성', category: '한식/순두부', rating: 4.3, price: '₩₩', distance: '잠실역', isSoloFriendly: true },
   { id: '77', name: '연남토마 롯데캐슬 잠실점', category: '일식/돈까스', rating: 4.3, price: '₩₩', distance: '잠실역', isSoloFriendly: true },
-  { id: '78', name: '고복 롯데백화점 잠실점 캐슬플라자', category: '중식', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '79', name: '계도 롯데백화점 잠실', category: '한식', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '78', name: '고복 롯데백화점 잠실점 캐슬플라자', category: '한식/냉면', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '79', name: '계도 롯데백화점 잠실', category: '일식/라멘', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '80', name: '삼우정 잠실본점', category: '한식/불고기', rating: 4.4, price: '₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
 ];
