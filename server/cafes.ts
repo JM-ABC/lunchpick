@@ -5,7 +5,6 @@ export const CAFES = [
   { id: 'c3', name: '베질루르 선셋에비뉴 월드타워점', category: '카페/밀크티', rating: 4.2, price: '₩₩', distance: '롯데월드몰' },
   { id: 'c4', name: 'CONNECT TO', category: '카페/디저트', rating: 4.3, price: '₩₩', distance: '롯데월드몰' },
   { id: 'c5', name: '니커버커 베이글', category: '카페/베이글', rating: 4.5, price: '₩₩', distance: '송리단길' },
-  { id: 'c6', name: '호이안로스터리', category: '카페/대형카페', rating: 4.3, price: '₩₩', distance: '석촌호수' },
   { id: 'c7', name: '위커파크', category: '카페', rating: 4.2, price: '₩₩', distance: '석촌호수' },
   { id: 'c8', name: '카페 이클립스', category: '테라스카페', rating: 4.3, price: '₩₩', distance: '석촌호수' },
   { id: 'c9', name: '슬로우어스 (SLOWUS)', category: '브런치카페', rating: 4.4, price: '₩₩', distance: '석촌호수' },

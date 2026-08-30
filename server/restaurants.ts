@@ -52,4 +52,11 @@ export const RESTAURANTS = [
   { id: '59', name: '김태완스시', category: '일식/스시', rating: 4.4, price: '₩₩', distance: '송리단길', isSoloFriendly: true },
   { id: '60', name: '이랑칼국수', category: '한식/닭한마리', rating: 4.5, price: '₩₩', distance: '송리단길', isSoloFriendly: false },
   { id: '61', name: '완도산회 포장마차', category: '해산물/횟집', rating: 4.3, price: '₩₩', distance: '송리단길', isSoloFriendly: false },
+  { id: '62', name: '몽촌닭갈비', category: '한식/닭갈비', rating: 4.5, price: '₩₩', distance: '석촌호수', isSoloFriendly: false },
+  { id: '63', name: '프로티너 잠실방이점', category: '샐러드/헬시푸드', rating: 4.3, price: '₩₩', distance: '방이동', isSoloFriendly: true },
+  { id: '64', name: '매드포갈릭 롯데캐슬 잠실점', category: '양식/이탈리안', rating: 4.2, price: '₩₩₩', distance: '잠실역', isSoloFriendly: false },
+  { id: '65', name: '교토퍼펙트말차 잠실롯데월드몰점', category: '디저트/말차', rating: 4.4, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '66', name: '팬트리12 롯데월드타워점', category: '양식/브런치', rating: 4.2, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '67', name: '난포 롯데월드몰', category: '한식', rating: 4.5, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
+  { id: '68', name: '금수복국 잠실소피텔점', category: '한식/복어', rating: 4.4, price: '₩₩₩', distance: '잠실역', isSoloFriendly: true },
 ];
