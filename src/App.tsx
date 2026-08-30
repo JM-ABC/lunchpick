@@ -166,7 +166,12 @@ const App: React.FC = () => {
             <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-200">
               <Utensils className="text-white w-6 h-6" />
             </div>
-            <h1 className="text-2xl font-black tracking-tighter">LUNCHPICK</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="font-logo text-2xl font-bold tracking-tight">LUNCHPICK</h1>
+              <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 text-[11px] font-bold rounded-full">
+                잠실
+              </span>
+            </div>
           </div>
 
           <nav className="flex w-full sm:w-auto bg-black/5 p-1 rounded-2xl">
