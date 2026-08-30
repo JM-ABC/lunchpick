@@ -35,6 +35,8 @@ const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'solo' | 'cafe' | 'team'>('solo');
   const [dailyRecommend, setDailyRecommend] = useState<any>(null);
   const [dailyRecommendError, setDailyRecommendError] = useState(false);
+  const [restaurantCategories, setRestaurantCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [dailyCafeRecommend, setDailyCafeRecommend] = useState<any>(null);
   const [dailyCafeRecommendError, setDailyCafeRecommendError] = useState(false);
   const [teamState, setTeamState] = useState<TeamState | null>(null);
@@ -46,12 +48,18 @@ const App: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const socketRef = useRef<WebSocket | null>(null);
 
-  const fetchDailyRecommend = () => {
+  const fetchDailyRecommend = (category: string = selectedCategory) => {
     setDailyRecommendError(false);
-    fetch('/api/daily-recommend')
+    const query = category !== 'all' ? `?category=${encodeURIComponent(category)}` : '';
+    fetch(`/api/daily-recommend${query}`)
       .then(res => res.json())
       .then(data => setDailyRecommend(data))
       .catch(() => setDailyRecommendError(true));
+  };
+
+  const handleSelectCategory = (category: string) => {
+    setSelectedCategory(category);
+    fetchDailyRecommend(category);
   };
 
   const fetchDailyCafeRecommend = () => {
@@ -65,6 +73,10 @@ const App: React.FC = () => {
   useEffect(() => {
     fetchDailyRecommend();
     fetchDailyCafeRecommend();
+    fetch('/api/restaurant-categories')
+      .then(res => res.json())
+      .then(data => setRestaurantCategories(data))
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -202,13 +214,33 @@ const App: React.FC = () => {
                     </h2>
                   </div>
 
+                  {restaurantCategories.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => handleSelectCategory('all')}
+                        className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${selectedCategory === 'all' ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
+                      >
+                        전체
+                      </button>
+                      {restaurantCategories.map(category => (
+                        <button
+                          key={category}
+                          onClick={() => handleSelectCategory(category)}
+                          className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${selectedCategory === category ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
+                        >
+                          {category}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
                   {dailyRecommendError ? (
                     <div className="space-y-6">
                       <div className="p-6 sm:p-10 bg-red-50 rounded-3xl border border-red-100">
                         <p className="text-red-600 font-medium">추천을 불러오지 못했어요. 다시 시도해주세요.</p>
                       </div>
                       <button
-                        onClick={fetchDailyRecommend}
+                        onClick={() => fetchDailyRecommend()}
                         className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
                       >
                         <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
@@ -230,7 +262,7 @@ const App: React.FC = () => {
                         </div>
                       </div>
                       <button
-                        onClick={fetchDailyRecommend}
+                        onClick={() => fetchDailyRecommend()}
                         className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
                       >
                         <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
