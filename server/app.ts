@@ -21,18 +21,12 @@ export function createApp(): { app: express.Express; server: Server } {
   const server = createServer(app);
   const wss = new WebSocketServer({ server, path: WS_PATH });
 
-  let teamState: TeamState = {
-    status: 'voting',
-    candidates: [...RESTAURANTS].sort(() => 0.5 - Math.random()).slice(0, 4),
-    votes: {},
-    userNames: {},
-    userCount: 0,
-  };
-
   const RESTAURANT_RECENT_LIMIT = 5;
   const CAFE_RECENT_LIMIT = 2;
+  const TEAM_CANDIDATE_ROUNDS_REMEMBERED = 2;
   const recentRestaurantIds: string[] = [];
   const recentCafeIds: string[] = [];
+  const recentTeamCandidateIds: string[] = [];
 
   function pickAvoidingRecent<T extends { id: string }>(pool: T[], recentIds: string[]): T {
     const candidates = pool.filter(item => !recentIds.includes(item.id));
@@ -44,6 +38,23 @@ export function createApp(): { app: express.Express; server: Server } {
     recentIds.push(id);
     if (recentIds.length > limit) recentIds.shift();
   }
+
+  function pickTeamCandidates(): typeof RESTAURANTS {
+    const pool = RESTAURANTS.filter(r => !recentTeamCandidateIds.includes(r.id));
+    const source = pool.length >= 4 ? pool : RESTAURANTS;
+    const picks = [...source].sort(() => 0.5 - Math.random()).slice(0, 4);
+    const limit = 4 * TEAM_CANDIDATE_ROUNDS_REMEMBERED;
+    picks.forEach(p => rememberRecent(recentTeamCandidateIds, p.id, limit));
+    return picks;
+  }
+
+  let teamState: TeamState = {
+    status: 'voting',
+    candidates: pickTeamCandidates(),
+    votes: {},
+    userNames: {},
+    userCount: 0,
+  };
 
   function broadcast(message: any) {
     const payload = JSON.stringify(message);
@@ -141,7 +152,7 @@ export function createApp(): { app: express.Express; server: Server } {
         case 'RESET_VOTE': {
           teamState = {
             status: 'voting',
-            candidates: [...RESTAURANTS].sort(() => 0.5 - Math.random()).slice(0, 4),
+            candidates: pickTeamCandidates(),
             votes: {},
             userNames: teamState.userNames, // Keep user names
             userCount: wss.clients.size,
