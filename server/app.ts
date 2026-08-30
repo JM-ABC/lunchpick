@@ -29,6 +29,22 @@ export function createApp(): { app: express.Express; server: Server } {
     userCount: 0,
   };
 
+  const RESTAURANT_RECENT_LIMIT = 5;
+  const CAFE_RECENT_LIMIT = 2;
+  const recentRestaurantIds: string[] = [];
+  const recentCafeIds: string[] = [];
+
+  function pickAvoidingRecent<T extends { id: string }>(pool: T[], recentIds: string[]): T {
+    const candidates = pool.filter(item => !recentIds.includes(item.id));
+    const list = candidates.length > 0 ? candidates : pool;
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
+  function rememberRecent(recentIds: string[], id: string, limit: number) {
+    recentIds.push(id);
+    if (recentIds.length > limit) recentIds.shift();
+  }
+
   function broadcast(message: any) {
     const payload = JSON.stringify(message);
     wss.clients.forEach((client) => {
@@ -140,13 +156,15 @@ export function createApp(): { app: express.Express; server: Server } {
   app.use(express.json());
 
   app.get('/api/daily-recommend', (req, res) => {
-    const randomRestaurant = RESTAURANTS[Math.floor(Math.random() * RESTAURANTS.length)];
-    res.json(randomRestaurant);
+    const restaurant = pickAvoidingRecent(RESTAURANTS, recentRestaurantIds);
+    rememberRecent(recentRestaurantIds, restaurant.id, RESTAURANT_RECENT_LIMIT);
+    res.json(restaurant);
   });
 
   app.get('/api/daily-cafe-recommend', (req, res) => {
-    const randomCafe = CAFES[Math.floor(Math.random() * CAFES.length)];
-    res.json(randomCafe);
+    const cafe = pickAvoidingRecent(CAFES, recentCafeIds);
+    rememberRecent(recentCafeIds, cafe.id, CAFE_RECENT_LIMIT);
+    res.json(cafe);
   });
 
   app.get('/api/recommend', (req, res) => {
