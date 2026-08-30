@@ -21,7 +21,9 @@ import { TeamState, ServerMessage } from './types';
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'solo' | 'cafe' | 'team'>('solo');
   const [dailyRecommend, setDailyRecommend] = useState<any>(null);
+  const [dailyRecommendError, setDailyRecommendError] = useState(false);
   const [dailyCafeRecommend, setDailyCafeRecommend] = useState<any>(null);
+  const [dailyCafeRecommendError, setDailyCafeRecommendError] = useState(false);
   const [teamState, setTeamState] = useState<TeamState | null>(null);
   const [userId, setUserId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
@@ -31,13 +33,25 @@ const App: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const socketRef = useRef<WebSocket | null>(null);
 
-  useEffect(() => {
+  const fetchDailyRecommend = () => {
+    setDailyRecommendError(false);
     fetch('/api/daily-recommend')
       .then(res => res.json())
-      .then(data => setDailyRecommend(data));
+      .then(data => setDailyRecommend(data))
+      .catch(() => setDailyRecommendError(true));
+  };
+
+  const fetchDailyCafeRecommend = () => {
+    setDailyCafeRecommendError(false);
     fetch('/api/daily-cafe-recommend')
       .then(res => res.json())
-      .then(data => setDailyCafeRecommend(data));
+      .then(data => setDailyCafeRecommend(data))
+      .catch(() => setDailyCafeRecommendError(true));
+  };
+
+  useEffect(() => {
+    fetchDailyRecommend();
+    fetchDailyCafeRecommend();
   }, []);
 
   useEffect(() => {
@@ -175,13 +189,26 @@ const App: React.FC = () => {
                     </h2>
                   </div>
 
-                  {dailyRecommend && (
+                  {dailyRecommendError ? (
+                    <div className="space-y-6">
+                      <div className="p-6 sm:p-10 bg-red-50 rounded-3xl border border-red-100">
+                        <p className="text-red-600 font-medium">추천을 불러오지 못했어요. 다시 시도해주세요.</p>
+                      </div>
+                      <button
+                        onClick={fetchDailyRecommend}
+                        className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                        다시 시도하기
+                      </button>
+                    </div>
+                  ) : dailyRecommend ? (
                     <div className="space-y-6">
                       <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
                           <div className="min-w-0">
                             <h3 className="text-xl sm:text-4xl font-bold break-keep">{dailyRecommend.name}</h3>
-                            <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance}</p>
+                            <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance} • {dailyRecommend.price}</p>
                           </div>
                           <div className="flex items-center gap-1 self-start sm:self-auto bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
                             <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
@@ -190,12 +217,22 @@ const App: React.FC = () => {
                         </div>
                       </div>
                       <button
-                        onClick={() => fetch('/api/daily-recommend').then(res => res.json()).then(data => setDailyRecommend(data))}
+                        onClick={fetchDailyRecommend}
                         className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
                       >
                         <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
                         다른 메뉴 추천받기
                       </button>
+                    </div>
+                  ) : (
+                    <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5 animate-pulse">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+                        <div className="min-w-0 space-y-3 w-full">
+                          <div className="h-8 sm:h-10 w-2/3 bg-black/5 rounded-lg" />
+                          <div className="h-4 w-1/3 bg-black/5 rounded-lg" />
+                        </div>
+                        <div className="h-10 w-20 bg-black/5 rounded-2xl shrink-0" />
+                      </div>
                     </div>
                   )}
                 </div>
@@ -221,13 +258,26 @@ const App: React.FC = () => {
                     </h2>
                   </div>
 
-                  {dailyCafeRecommend && (
+                  {dailyCafeRecommendError ? (
+                    <div className="space-y-6">
+                      <div className="p-6 sm:p-10 bg-red-50 rounded-3xl border border-red-100">
+                        <p className="text-red-600 font-medium">추천을 불러오지 못했어요. 다시 시도해주세요.</p>
+                      </div>
+                      <button
+                        onClick={fetchDailyCafeRecommend}
+                        className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                        다시 시도하기
+                      </button>
+                    </div>
+                  ) : dailyCafeRecommend ? (
                     <div className="space-y-6">
                       <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
                           <div className="min-w-0">
                             <h3 className="text-xl sm:text-4xl font-bold break-keep">{dailyCafeRecommend.name}</h3>
-                            <p className="text-[#9e9e9e] font-medium">{dailyCafeRecommend.category} • {dailyCafeRecommend.distance}</p>
+                            <p className="text-[#9e9e9e] font-medium">{dailyCafeRecommend.category} • {dailyCafeRecommend.distance} • {dailyCafeRecommend.price}</p>
                           </div>
                           <div className="flex items-center gap-1 self-start sm:self-auto bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
                             <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
@@ -236,12 +286,22 @@ const App: React.FC = () => {
                         </div>
                       </div>
                       <button
-                        onClick={() => fetch('/api/daily-cafe-recommend').then(res => res.json()).then(data => setDailyCafeRecommend(data))}
+                        onClick={fetchDailyCafeRecommend}
                         className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
                       >
                         <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
                         다른 카페 추천받기
                       </button>
+                    </div>
+                  ) : (
+                    <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5 animate-pulse">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+                        <div className="min-w-0 space-y-3 w-full">
+                          <div className="h-8 sm:h-10 w-2/3 bg-black/5 rounded-lg" />
+                          <div className="h-4 w-1/3 bg-black/5 rounded-lg" />
+                        </div>
+                        <div className="h-10 w-20 bg-black/5 rounded-2xl shrink-0" />
+                      </div>
                     </div>
                   )}
                 </div>
@@ -353,7 +413,7 @@ const App: React.FC = () => {
                           <h3 className="text-2xl font-bold text-[#9e9e9e]">오늘의 점심은 바로!</h3>
                           <div className="space-y-2">
                             <span className="text-emerald-600 font-bold text-sm uppercase tracking-widest">{getWinner()?.category}</span>
-                            <h4 className="text-6xl sm:text-8xl font-black tracking-tighter">{getWinner()?.name}</h4>
+                            <h4 className="text-6xl sm:text-8xl font-black tracking-tighter break-keep">{getWinner()?.name}</h4>
                           </div>
                         </div>
                         
@@ -399,7 +459,7 @@ const App: React.FC = () => {
                               <div className="space-y-2 mt-auto">
                                 <h4 className="text-2xl font-black tracking-tight leading-tight">{restaurant.name}</h4>
                                 <p className={`text-sm font-medium ${isVoted ? 'text-emerald-100' : 'text-[#9e9e9e]'}`}>
-                                  {restaurant.distance} • ⭐ {restaurant.rating}
+                                  {restaurant.distance} • ⭐ {restaurant.rating} • {restaurant.price}
                                 </p>
                               </div>
 

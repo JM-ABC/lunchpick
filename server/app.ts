@@ -22,7 +22,7 @@ export function createApp(): { app: express.Express; server: Server } {
   const wss = new WebSocketServer({ server, path: WS_PATH });
 
   let teamState: TeamState = {
-    status: 'waiting',
+    status: 'voting',
     candidates: [...RESTAURANTS].sort(() => 0.5 - Math.random()).slice(0, 4),
     votes: {},
     userNames: {},
@@ -124,7 +124,7 @@ export function createApp(): { app: express.Express; server: Server } {
 
         case 'RESET_VOTE': {
           teamState = {
-            status: 'waiting',
+            status: 'voting',
             candidates: [...RESTAURANTS].sort(() => 0.5 - Math.random()).slice(0, 4),
             votes: {},
             userNames: teamState.userNames, // Keep user names
