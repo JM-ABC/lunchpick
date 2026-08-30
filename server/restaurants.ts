@@ -45,4 +45,11 @@ export const RESTAURANTS = [
   { id: '52', name: '엠스테이크하우스', category: '양식/스테이크', rating: 4.3, price: '₩₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
   { id: '53', name: '렌위치 롯데월드몰점', category: '샌드위치/샐러드', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '54', name: '마루가메우동 롯데월드몰점', category: '일식/우동', rating: 4.3, price: '₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '55', name: '지강한식당 잠실점', category: '한식', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '56', name: '서보', category: '태국음식', rating: 4.5, price: '₩₩', distance: '송리단길', isSoloFriendly: true },
+  { id: '57', name: '금금', category: '퓨전한식', rating: 4.6, price: '₩₩₩', distance: '송리단길', isSoloFriendly: true },
+  { id: '58', name: '본디', category: '고기/구이', rating: 4.7, price: '₩₩₩', distance: '송리단길', isSoloFriendly: false },
+  { id: '59', name: '김태완스시', category: '일식/스시', rating: 4.4, price: '₩₩', distance: '송리단길', isSoloFriendly: true },
+  { id: '60', name: '이랑칼국수', category: '한식/닭한마리', rating: 4.5, price: '₩₩', distance: '송리단길', isSoloFriendly: false },
+  { id: '61', name: '완도산회 포장마차', category: '해산물/횟집', rating: 4.3, price: '₩₩', distance: '송리단길', isSoloFriendly: false },
 ];
