@@ -246,33 +246,34 @@ const App: React.FC = () => {
                     </h2>
                   </div>
 
-                  {restaurantCategories.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        onClick={() => handleSelectCategory('all')}
-                        className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${selectedCategory === 'all' ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
-                      >
-                        전체
-                      </button>
-                      {restaurantCategories.map(category => (
+                  <div className="flex flex-wrap gap-2">
+                    {restaurantCategories.length > 0 && (
+                      <>
                         <button
-                          key={category}
-                          onClick={() => handleSelectCategory(category)}
-                          className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${selectedCategory === category ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
+                          onClick={() => handleSelectCategory('all')}
+                          className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${selectedCategory === 'all' ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
                         >
-                          {category}
+                          전체
                         </button>
-                      ))}
-                    </div>
-                  )}
-
-                  <button
-                    onClick={handleToggleSoloOnly}
-                    className={`self-start flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-colors ${soloOnly ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
-                  >
-                    <User className="w-4 h-4" />
-                    혼밥 가능할 것으로 추정되는 곳만
-                  </button>
+                        {restaurantCategories.map(category => (
+                          <button
+                            key={category}
+                            onClick={() => handleSelectCategory(category)}
+                            className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${selectedCategory === category ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
+                          >
+                            {category}
+                          </button>
+                        ))}
+                      </>
+                    )}
+                    <button
+                      onClick={handleToggleSoloOnly}
+                      className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-bold transition-colors ${soloOnly ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
+                    >
+                      <User className="w-4 h-4" />
+                      혼밥 가능(추정)
+                    </button>
+                  </div>
 
                   {dailyRecommendError ? (
                     <div className="space-y-6">
