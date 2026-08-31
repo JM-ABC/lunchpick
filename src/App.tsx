@@ -759,7 +759,7 @@ const App: React.FC = () => {
                   value={tempNickname}
                   onChange={e => setTempNickname(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleSetNickname()}
-                  className="w-full bg-[#f9f9f9] border-2 border-black/5 rounded-3xl px-8 py-6 text-xl font-bold focus:outline-none focus:border-emerald-500/30 transition-all text-center"
+                  className="w-full bg-[#f9f9f9] border-2 border-black/5 rounded-3xl px-6 py-6 text-base sm:text-xl font-bold focus:outline-none focus:border-emerald-500/30 transition-all text-center"
                   autoFocus
                 />
                 <button 
