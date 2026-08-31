@@ -37,6 +37,7 @@ const App: React.FC = () => {
   const [dailyRecommendError, setDailyRecommendError] = useState(false);
   const [restaurantCategories, setRestaurantCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [soloOnly, setSoloOnly] = useState(false);
   const [dailyCafeRecommend, setDailyCafeRecommend] = useState<any>(null);
   const [dailyCafeRecommendError, setDailyCafeRecommendError] = useState(false);
   const [dailyGroupRecommend, setDailyGroupRecommend] = useState<any>(null);
@@ -50,9 +51,12 @@ const App: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const socketRef = useRef<WebSocket | null>(null);
 
-  const fetchDailyRecommend = (category: string = selectedCategory) => {
+  const fetchDailyRecommend = (category: string = selectedCategory, solo: boolean = soloOnly) => {
     setDailyRecommendError(false);
-    const query = category !== 'all' ? `?category=${encodeURIComponent(category)}` : '';
+    const params = new URLSearchParams();
+    if (category !== 'all') params.set('category', category);
+    if (solo) params.set('solo', 'true');
+    const query = params.toString() ? `?${params.toString()}` : '';
     fetch(`/api/daily-recommend${query}`)
       .then(res => res.json())
       .then(data => setDailyRecommend(data))
@@ -61,7 +65,13 @@ const App: React.FC = () => {
 
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category);
-    fetchDailyRecommend(category);
+    fetchDailyRecommend(category, soloOnly);
+  };
+
+  const handleToggleSoloOnly = () => {
+    const next = !soloOnly;
+    setSoloOnly(next);
+    fetchDailyRecommend(selectedCategory, next);
   };
 
   const fetchDailyCafeRecommend = () => {
@@ -256,6 +266,14 @@ const App: React.FC = () => {
                     </div>
                   )}
 
+                  <button
+                    onClick={handleToggleSoloOnly}
+                    className={`self-start flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-colors ${soloOnly ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
+                  >
+                    <User className="w-4 h-4" />
+                    혼밥 가능할 것으로 추정되는 곳만
+                  </button>
+
                   {dailyRecommendError ? (
                     <div className="space-y-6">
                       <div className="p-6 sm:p-10 bg-red-50 rounded-3xl border border-red-100">
@@ -276,6 +294,11 @@ const App: React.FC = () => {
                           <div className="min-w-0">
                             <h3 className="text-xl sm:text-4xl font-bold break-keep">{dailyRecommend.name}</h3>
                             <p className="text-[#9e9e9e] font-medium">{dailyRecommend.category} • {dailyRecommend.distance} • {formatPrice(dailyRecommend.price)}</p>
+                            {dailyRecommend.isSoloFriendly && (
+                              <span className="inline-block mt-2 px-2.5 py-1 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full">
+                                🙋 혼밥 가능 추정
+                              </span>
+                            )}
                           </div>
                           <div className="flex items-center gap-1 self-start sm:self-auto bg-white px-4 py-2 rounded-2xl border border-black/5 shadow-sm">
                             <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />

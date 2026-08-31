@@ -179,7 +179,9 @@ export function createApp(): { app: express.Express; server: Server } {
 
   app.get('/api/daily-recommend', (req, res) => {
     const category = typeof req.query.category === 'string' ? req.query.category : undefined;
-    const filtered = category ? RESTAURANTS.filter(r => broadCategory(r.category) === category) : RESTAURANTS;
+    const soloOnly = req.query.solo === 'true';
+    let filtered = category ? RESTAURANTS.filter(r => broadCategory(r.category) === category) : RESTAURANTS;
+    if (soloOnly) filtered = filtered.filter(r => r.isSoloFriendly);
     const pool = filtered.length > 0 ? filtered : RESTAURANTS;
     const restaurant = pickAvoidingRecent(pool, recentRestaurantIds);
     rememberRecent(recentRestaurantIds, restaurant.id, RESTAURANT_RECENT_LIMIT);
