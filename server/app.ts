@@ -182,8 +182,14 @@ export function createApp(): { app: express.Express; server: Server } {
     const soloOnly = req.query.solo === 'true';
     let filtered = category ? RESTAURANTS.filter(r => broadCategory(r.category) === category) : RESTAURANTS;
     if (soloOnly) filtered = filtered.filter(r => r.isSoloFriendly);
-    const pool = filtered.length > 0 ? filtered : RESTAURANTS;
-    const restaurant = pickAvoidingRecent(pool, recentRestaurantIds);
+    if (filtered.length === 0) {
+      // Category + solo-only combined match nothing — don't silently fall
+      // back to the full list, that would ignore both filters the user
+      // picked and return an unrelated restaurant.
+      res.status(404).json({ error: 'no_match' });
+      return;
+    }
+    const restaurant = pickAvoidingRecent(filtered, recentRestaurantIds);
     rememberRecent(recentRestaurantIds, restaurant.id, RESTAURANT_RECENT_LIMIT);
     res.json(restaurant);
   });

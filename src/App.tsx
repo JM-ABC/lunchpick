@@ -35,6 +35,7 @@ const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'solo' | 'cafe' | 'group' | 'team'>('solo');
   const [dailyRecommend, setDailyRecommend] = useState<any>(null);
   const [dailyRecommendError, setDailyRecommendError] = useState(false);
+  const [dailyRecommendEmpty, setDailyRecommendEmpty] = useState(false);
   const [restaurantCategories, setRestaurantCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [soloOnly, setSoloOnly] = useState(false);
@@ -53,13 +54,21 @@ const App: React.FC = () => {
 
   const fetchDailyRecommend = (category: string = selectedCategory, solo: boolean = soloOnly) => {
     setDailyRecommendError(false);
+    setDailyRecommendEmpty(false);
     const params = new URLSearchParams();
     if (category !== 'all') params.set('category', category);
     if (solo) params.set('solo', 'true');
     const query = params.toString() ? `?${params.toString()}` : '';
     fetch(`/api/daily-recommend${query}`)
-      .then(res => res.json())
-      .then(data => setDailyRecommend(data))
+      .then(res => {
+        if (res.status === 404) {
+          setDailyRecommend(null);
+          setDailyRecommendEmpty(true);
+          return null;
+        }
+        return res.json();
+      })
+      .then(data => { if (data) setDailyRecommend(data); })
       .catch(() => setDailyRecommendError(true));
   };
 
@@ -72,6 +81,12 @@ const App: React.FC = () => {
     const next = !soloOnly;
     setSoloOnly(next);
     fetchDailyRecommend(selectedCategory, next);
+  };
+
+  const handleResetFilters = () => {
+    setSelectedCategory('all');
+    setSoloOnly(false);
+    fetchDailyRecommend('all', false);
   };
 
   const fetchDailyCafeRecommend = () => {
@@ -275,7 +290,20 @@ const App: React.FC = () => {
                     </button>
                   </div>
 
-                  {dailyRecommendError ? (
+                  {dailyRecommendEmpty ? (
+                    <div className="space-y-6">
+                      <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
+                        <p className="text-[#757575] font-medium">선택한 조건(카테고리 + 혼밥 가능)에 맞는 곳이 없어요.</p>
+                      </div>
+                      <button
+                        onClick={handleResetFilters}
+                        className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                        필터 초기화
+                      </button>
+                    </div>
+                  ) : dailyRecommendError ? (
                     <div className="space-y-6">
                       <div className="p-6 sm:p-10 bg-red-50 rounded-3xl border border-red-100">
                         <p className="text-red-600 font-medium">추천을 불러오지 못했어요. 다시 시도해주세요.</p>
