@@ -77,4 +77,9 @@ export const RESTAURANTS = [
   { id: '89', name: '백소정 잠실본점', category: '일식/돈카츠', rating: 4.4, price: '₩₩', distance: '방이동', isSoloFriendly: true },
   { id: '90', name: '텍사스로드하우스 잠실본점', category: '양식/스테이크', rating: 4.5, price: '₩₩₩', distance: '방이동', isSoloFriendly: true },
   { id: '91', name: '퀸즈가든 잠실점', category: '한식/샤브샤브', rating: 4.3, price: '₩₩₩', distance: '방이동', isSoloFriendly: false },
+  { id: '92', name: '포브라더스 롯데백화점 잠실점', category: '베트남음식/쌀국수', rating: 5.0, price: '₩₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '93', name: 'MIP', category: '양식', rating: 5.0, price: '₩₩₩', distance: '석촌호수', isSoloFriendly: true },
+  { id: '94', name: '카츠젠 잠실월드타워점', category: '일식/돈까스', rating: 5.0, price: '₩₩', distance: '잠실역', isSoloFriendly: true },
+  { id: '95', name: '분지로 롯데월드몰점', category: '일식/돈까스', rating: 5.0, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '96', name: '분지로 롯데백화점 잠실점', category: '일식/돈까스', rating: 5.0, price: '₩₩₩', distance: '롯데백화점', isSoloFriendly: true },
 ];
