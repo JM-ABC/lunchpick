@@ -75,4 +75,7 @@ export const RESTAURANTS = [
   { id: '86', name: '카렌 롯데백화점 잠실점', category: '대만음식/철판요리', rating: 4.3, price: '₩₩₩', distance: '롯데백화점', isSoloFriendly: false },
   { id: '87', name: '미즈컨테이너 롯데백화점 잠실점', category: '양식/이탈리안', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '88', name: '샤브보트', category: '한식/샤브샤브', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '89', name: '백소정 잠실본점', category: '일식/돈카츠', rating: 4.4, price: '₩₩', distance: '방이동', isSoloFriendly: true },
+  { id: '90', name: '텍사스로드하우스 잠실본점', category: '양식/스테이크', rating: 4.5, price: '₩₩₩', distance: '방이동', isSoloFriendly: true },
+  { id: '91', name: '퀸즈가든 잠실점', category: '한식/샤브샤브', rating: 4.3, price: '₩₩₩', distance: '방이동', isSoloFriendly: false },
 ];
