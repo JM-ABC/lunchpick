@@ -783,9 +783,7 @@ const App: React.FC = () => {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
           <p className="text-sm font-bold text-[#9e9e9e]">© 2026 LUNCHPICK. All rights reserved.</p>
           <div className="flex gap-8 -my-3">
-            <a href="#" className="py-3 text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Privacy</a>
-            <a href="#" className="py-3 text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Terms</a>
-            <a href="#" className="py-3 text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Contact</a>
+            <a href="mailto:jmyoonkr@gmail.com" className="py-3 text-sm font-bold text-[#9e9e9e] hover:text-[#141414]">Contact</a>
           </div>
         </div>
       </footer>
