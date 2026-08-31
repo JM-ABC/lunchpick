@@ -22,7 +22,6 @@ export const RESTAURANTS = [
   { id: '21', name: '스페인클럽', category: '스페인음식', rating: 4.1, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
   { id: '22', name: '차이797', category: '중식', rating: 4.2, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
   { id: '23', name: '부탄츄', category: '일식/라멘', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
-  { id: '26', name: '코코이찌방야', category: '일식/카레', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '27', name: '사이드쇼', category: '분식/떡볶이', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '28', name: '리틀사이공', category: '베트남음식', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '29', name: '강가', category: '인도음식', rating: 4.3, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
