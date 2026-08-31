@@ -31,7 +31,6 @@ export const RESTAURANTS = [
   { id: '33', name: '땀땀', category: '베트남음식', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '34', name: '한국집', category: '한식/비빔밥', rating: 4.0, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '36', name: '봉피양', category: '한식/냉면', rating: 4.4, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
-  { id: '37', name: '다이치', category: '일식/돈까스', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '41', name: '대치동함흥면옥', category: '한식/냉면', rating: 4.1, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '43', name: '촙촙 (Chop Chop)', category: '아시안/베트남', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '45', name: '딤딤섬', category: '중식/딤섬', rating: 4.3, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
