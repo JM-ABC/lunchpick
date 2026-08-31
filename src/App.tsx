@@ -735,37 +735,37 @@ const App: React.FC = () => {
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="relative bg-white rounded-[40px] p-10 sm:p-16 w-full max-w-xl shadow-2xl space-y-10"
+              className="relative bg-white rounded-[40px] p-6 sm:p-16 w-full max-w-xl shadow-2xl space-y-6 sm:space-y-10"
             >
               <button
                 onClick={() => { setShowNicknamePrompt(false); setActiveTab('solo'); }}
                 aria-label="닫고 밥집추천으로 돌아가기"
-                className="absolute top-6 right-6 sm:top-8 sm:right-8 w-10 h-10 flex items-center justify-center rounded-full text-[#9e9e9e] hover:bg-black/5 hover:text-[#141414] transition-colors"
+                className="absolute top-4 right-4 sm:top-8 sm:right-8 w-10 h-10 flex items-center justify-center rounded-full text-[#9e9e9e] hover:bg-black/5 hover:text-[#141414] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
-              <div className="space-y-4 text-center">
-                <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <User className="w-10 h-10 text-emerald-500" />
+              <div className="space-y-3 sm:space-y-4 text-center">
+                <div className="w-14 h-14 sm:w-20 sm:h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-6">
+                  <User className="w-7 h-7 sm:w-10 sm:h-10 text-emerald-500" />
                 </div>
-                <h2 className="text-4xl font-black tracking-tight">반가워요!</h2>
-                <p className="text-lg text-[#757575] font-medium">팀원들이 알아볼 수 있게 닉네임을 정해주세요.</p>
+                <h2 className="text-2xl sm:text-4xl font-black tracking-tight">반가워요!</h2>
+                <p className="text-sm sm:text-lg text-[#757575] font-medium">팀원들이 알아볼 수 있게 닉네임을 정해주세요.</p>
               </div>
 
-              <div className="space-y-6">
-                <input 
-                  type="text" 
+              <div className="space-y-4 sm:space-y-6">
+                <input
+                  type="text"
                   placeholder="닉네임 입력 (예: 홍길동)"
                   value={tempNickname}
                   onChange={e => setTempNickname(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && handleSetNickname()}
-                  className="w-full bg-[#f9f9f9] border-2 border-black/5 rounded-3xl px-6 py-6 text-base sm:text-xl font-bold focus:outline-none focus:border-emerald-500/30 transition-all text-center"
+                  className="w-full bg-[#f9f9f9] border-2 border-black/5 rounded-3xl px-5 py-4 sm:px-6 sm:py-6 text-base sm:text-xl font-bold focus:outline-none focus:border-emerald-500/30 transition-all text-center"
                   autoFocus
                 />
-                <button 
+                <button
                   onClick={handleSetNickname}
                   disabled={!tempNickname.trim()}
-                  className="w-full bg-black text-white py-6 rounded-3xl font-bold text-xl hover:bg-emerald-600 transition-all shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-black text-white py-4 sm:py-6 rounded-3xl font-bold text-base sm:text-xl hover:bg-emerald-600 transition-all shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   시작하기
                 </button>
