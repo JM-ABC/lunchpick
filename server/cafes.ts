@@ -32,4 +32,12 @@ export const CAFES = [
   { id: 'c31', name: '123젤라또', category: '젤라또', rating: 4.3, price: '₩₩', distance: '롯데백화점' },
   { id: 'c32', name: '메종라꽁비에뜨', category: '카페/베이커리', rating: 4.4, price: '₩₩', distance: '롯데백화점' },
   { id: 'c33', name: '고디바 베이커리', category: '디저트카페', rating: 4.3, price: '₩₩', distance: '롯데백화점' },
+  { id: 'c34', name: '노아스로스팅카페', category: '스페셜티커피', rating: 4.3, price: '₩₩', distance: '롯데월드몰' },
+  { id: 'c35', name: '슈퍼말차카페', category: '디저트/말차', rating: 4.2, price: '₩₩', distance: '롯데월드몰' },
+  { id: 'c36', name: '아쿠아가든카페', category: '카페', rating: 4.1, price: '₩₩', distance: '롯데월드몰' },
+  { id: 'c37', name: '뮬리노에스프레소바', category: '스페셜티커피', rating: 4.3, price: '₩₩', distance: '롯데월드몰' },
+  { id: 'c38', name: '고호재', category: '전통찻집', rating: 4.3, price: '₩₩', distance: '롯데월드몰' },
+  { id: 'c39', name: '카페페퍼', category: '디저트카페', rating: 4.5, price: '₩₩', distance: '송리단길' },
+  { id: 'c40', name: '포모르', category: '브런치카페', rating: 4.4, price: '₩₩', distance: '송리단길' },
+  { id: 'c41', name: '니드스윗', category: '카페', rating: 4.2, price: '₩₩', distance: '송리단길' },
 ];
