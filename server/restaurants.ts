@@ -100,4 +100,11 @@ export const RESTAURANTS = [
   { id: '112', name: '멜팅소울', category: '양식/버거', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '113', name: '샤브테이블', category: '한식/샤브샤브', rating: 4.2, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
   { id: '114', name: '시마스시', category: '일식/스시', rating: 4.3, price: '₩₩', distance: '롯데백화점', isSoloFriendly: true },
+  { id: '115', name: '편백집', category: '한식', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '116', name: '댄싱홍콩', category: '중식', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '117', name: '반도카츠', category: '일식/카츠', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '118', name: '샤브플레이', category: '한식/샤브샤브', rating: 4.2, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '119', name: 'HEIROKUSUSHI', category: '일식/스시', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '120', name: '이타마에스시', category: '일식/스시', rating: 4.5, price: '₩₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
+  { id: '121', name: '캐롤스', category: '양식', rating: 4.2, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
 ];
