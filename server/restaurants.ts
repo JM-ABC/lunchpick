@@ -112,4 +112,7 @@ export const RESTAURANTS = [
   { id: '124', name: '카사데타코 송리단길점', category: '멕시칸/타코', rating: 4.4, price: '₩₩', distance: '송리단길', isSoloFriendly: true },
   { id: '125', name: '방콕언니', category: '태국음식', rating: 4.4, price: '₩₩', distance: '송파동', isSoloFriendly: true },
   { id: '126', name: '멘야하나비', category: '일식/라멘', rating: 4.4, price: '₩₩', distance: '송파동', isSoloFriendly: true },
+  { id: '127', name: '쿠차라 잠실역점', category: '멕시칸', rating: 4.7, price: '₩₩', distance: '잠실역', isSoloFriendly: true },
+  { id: '128', name: '메밀집', category: '한식/막국수', rating: 4.5, price: '₩₩', distance: '송리단길', isSoloFriendly: true },
+  { id: '129', name: '라코즈', category: '양식/파스타', rating: 4.5, price: '₩₩₩', distance: '송리단길', isSoloFriendly: false },
 ];
