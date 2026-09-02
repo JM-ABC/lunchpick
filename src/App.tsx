@@ -839,7 +839,7 @@ const App: React.FC = () => {
       {/* Footer */}
       <footer className="max-w-7xl mx-auto px-6 py-12 border-t border-black/5 space-y-6">
         <p className="text-xs text-[#9e9e9e]">
-          ⭐ 별점은 제작자의 극히 주관적인 평가입니다. 정확한 평가는 네이버지도·카카오맵 등에서 확인해주세요.
+          ⭐ 별점은 그저 제작자 맘입니다. 정확한 평가는 네이버지도·카카오맵 등에서 확인해주세요.
         </p>
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
           <p className="text-sm font-bold text-[#9e9e9e]">© 2026 LUNCHPICK. All rights reserved.</p>
