@@ -200,8 +200,19 @@ export function createApp(): { app: express.Express; server: Server } {
     res.json(cafe);
   });
 
+  app.get('/api/group-categories', (req, res) => {
+    const categories = Array.from(new Set(GROUP_VENUES.map(v => broadCategory(v.category)))).sort();
+    res.json(categories);
+  });
+
   app.get('/api/daily-group-recommend', (req, res) => {
-    const venue = pickAvoidingRecent(GROUP_VENUES, recentGroupIds);
+    const category = typeof req.query.category === 'string' ? req.query.category : undefined;
+    const filtered = category ? GROUP_VENUES.filter(v => broadCategory(v.category) === category) : GROUP_VENUES;
+    if (filtered.length === 0) {
+      res.status(404).json({ error: 'no_match' });
+      return;
+    }
+    const venue = pickAvoidingRecent(filtered, recentGroupIds);
     rememberRecent(recentGroupIds, venue.id, GROUP_RECENT_LIMIT);
     res.json(venue);
   });

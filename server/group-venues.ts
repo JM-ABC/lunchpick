@@ -22,4 +22,9 @@ export const GROUP_VENUES = [
   { id: 'g20', name: '소뭉집 방이직영점', category: '한식/육회', rating: 4.4, price: '₩₩₩', distance: '방이동' },
   { id: 'g21', name: '무교낙지해물탕', category: '한식/해물탕', rating: 4.3, price: '₩₩₩', distance: '방이동' },
   { id: 'g22', name: '텍사스로드하우스 잠실본점', category: '양식/스테이크', rating: 4.5, price: '₩₩₩', distance: '방이동' },
+  { id: 'g23', name: '강촌식당 방이점', category: '한식/닭갈비', rating: 4.4, price: '₩₩', distance: '방이동' },
+  { id: 'g24', name: '청선 방이본점', category: '고기/구이', rating: 4.4, price: '₩₩₩', distance: '방이동' },
+  { id: 'g25', name: '굽돌집 잠실방이직영점', category: '고기/구이', rating: 4.3, price: '₩₩₩', distance: '방이동' },
+  { id: 'g26', name: '메종성수돈 송파점', category: '고기/돼지고기', rating: 4.4, price: '₩₩₩', distance: '송파' },
+  { id: 'g27', name: '마스타하이볼', category: '이자카야/하이볼', rating: 4.4, price: '₩₩', distance: '방이동' },
 ];

@@ -43,6 +43,9 @@ const App: React.FC = () => {
   const [dailyCafeRecommendError, setDailyCafeRecommendError] = useState(false);
   const [dailyGroupRecommend, setDailyGroupRecommend] = useState<any>(null);
   const [dailyGroupRecommendError, setDailyGroupRecommendError] = useState(false);
+  const [dailyGroupRecommendEmpty, setDailyGroupRecommendEmpty] = useState(false);
+  const [groupCategories, setGroupCategories] = useState<string[]>([]);
+  const [selectedGroupCategory, setSelectedGroupCategory] = useState<string>('all');
   const [teamState, setTeamState] = useState<TeamState | null>(null);
   const [userId, setUserId] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
@@ -97,12 +100,31 @@ const App: React.FC = () => {
       .catch(() => setDailyCafeRecommendError(true));
   };
 
-  const fetchDailyGroupRecommend = () => {
+  const fetchDailyGroupRecommend = (category: string = selectedGroupCategory) => {
     setDailyGroupRecommendError(false);
-    fetch('/api/daily-group-recommend')
-      .then(res => res.json())
-      .then(data => setDailyGroupRecommend(data))
+    setDailyGroupRecommendEmpty(false);
+    const query = category !== 'all' ? `?category=${encodeURIComponent(category)}` : '';
+    fetch(`/api/daily-group-recommend${query}`)
+      .then(res => {
+        if (res.status === 404) {
+          setDailyGroupRecommend(null);
+          setDailyGroupRecommendEmpty(true);
+          return null;
+        }
+        return res.json();
+      })
+      .then(data => { if (data) setDailyGroupRecommend(data); })
       .catch(() => setDailyGroupRecommendError(true));
+  };
+
+  const handleSelectGroupCategory = (category: string) => {
+    setSelectedGroupCategory(category);
+    fetchDailyGroupRecommend(category);
+  };
+
+  const handleResetGroupFilters = () => {
+    setSelectedGroupCategory('all');
+    fetchDailyGroupRecommend('all');
   };
 
   useEffect(() => {
@@ -112,6 +134,10 @@ const App: React.FC = () => {
     fetch('/api/restaurant-categories')
       .then(res => res.json())
       .then(data => setRestaurantCategories(data))
+      .catch(() => {});
+    fetch('/api/group-categories')
+      .then(res => res.json())
+      .then(data => setGroupCategories(data))
       .catch(() => {});
   }, []);
 
@@ -446,13 +472,48 @@ const App: React.FC = () => {
                     </h2>
                   </div>
 
-                  {dailyGroupRecommendError ? (
+                  <div className="flex flex-wrap gap-2">
+                    {groupCategories.length > 0 && (
+                      <>
+                        <button
+                          onClick={() => handleSelectGroupCategory('all')}
+                          className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${selectedGroupCategory === 'all' ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
+                        >
+                          전체
+                        </button>
+                        {groupCategories.map(category => (
+                          <button
+                            key={category}
+                            onClick={() => handleSelectGroupCategory(category)}
+                            className={`px-4 py-2 rounded-full text-sm font-bold transition-colors ${selectedGroupCategory === category ? 'bg-emerald-500 text-white' : 'bg-black/5 text-[#757575] hover:bg-black/10'}`}
+                          >
+                            {category}
+                          </button>
+                        ))}
+                      </>
+                    )}
+                  </div>
+
+                  {dailyGroupRecommendEmpty ? (
+                    <div className="space-y-6">
+                      <div className="p-6 sm:p-10 bg-[#f9f9f9] rounded-3xl border border-black/5">
+                        <p className="text-[#757575] font-medium">선택한 카테고리에 맞는 곳이 없어요.</p>
+                      </div>
+                      <button
+                        onClick={handleResetGroupFilters}
+                        className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
+                      >
+                        <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
+                        필터 초기화
+                      </button>
+                    </div>
+                  ) : dailyGroupRecommendError ? (
                     <div className="space-y-6">
                       <div className="p-6 sm:p-10 bg-red-50 rounded-3xl border border-red-100">
                         <p className="text-red-600 font-medium">추천을 불러오지 못했어요. 다시 시도해주세요.</p>
                       </div>
                       <button
-                        onClick={fetchDailyGroupRecommend}
+                        onClick={() => fetchDailyGroupRecommend()}
                         className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
                       >
                         <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
@@ -474,7 +535,7 @@ const App: React.FC = () => {
                         </div>
                       </div>
                       <button
-                        onClick={fetchDailyGroupRecommend}
+                        onClick={() => fetchDailyGroupRecommend()}
                         className="group -my-3 flex items-center gap-3 py-3 text-sm font-bold text-[#9e9e9e] hover:text-emerald-600 transition-colors"
                       >
                         <RefreshCw className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />

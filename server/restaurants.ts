@@ -107,4 +107,9 @@ export const RESTAURANTS = [
   { id: '119', name: 'HEIROKUSUSHI', category: '일식/스시', rating: 4.3, price: '₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '120', name: '이타마에스시', category: '일식/스시', rating: 4.5, price: '₩₩₩₩', distance: '롯데월드몰', isSoloFriendly: true },
   { id: '121', name: '캐롤스', category: '양식', rating: 4.2, price: '₩₩₩', distance: '롯데월드몰', isSoloFriendly: false },
+  { id: '122', name: '청화초밥', category: '일식/스시', rating: 4.5, price: '₩₩', distance: '방이동', isSoloFriendly: true },
+  { id: '123', name: '그리지하우스', category: '양식/햄버그스테이크', rating: 4.4, price: '₩₩', distance: '송파동', isSoloFriendly: true },
+  { id: '124', name: '카사데타코 송리단길점', category: '멕시칸/타코', rating: 4.4, price: '₩₩', distance: '송리단길', isSoloFriendly: true },
+  { id: '125', name: '방콕언니', category: '태국음식', rating: 4.4, price: '₩₩', distance: '송파동', isSoloFriendly: true },
+  { id: '126', name: '멘야하나비', category: '일식/라멘', rating: 4.4, price: '₩₩', distance: '송파동', isSoloFriendly: true },
 ];
