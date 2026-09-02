@@ -26,5 +26,7 @@ export const GROUP_VENUES = [
   { id: 'g24', name: '청선 방이본점', category: '고기/구이', rating: 4.4, price: '₩₩₩', distance: '방이동' },
   { id: 'g25', name: '굽돌집 잠실방이직영점', category: '고기/구이', rating: 4.3, price: '₩₩₩', distance: '방이동' },
   { id: 'g26', name: '메종성수돈 송파점', category: '고기/돼지고기', rating: 4.4, price: '₩₩₩', distance: '송파' },
-  { id: 'g27', name: '마스타하이볼', category: '이자카야/하이볼', rating: 4.4, price: '₩₩', distance: '방이동' },
+  { id: 'g27', name: '마스타하이볼', category: '바/하이볼', rating: 4.4, price: '₩₩', distance: '방이동' },
+  { id: 'g28', name: '나쉬펍 잠실방이점', category: '바/맥주', rating: 4.4, price: '₩₩', distance: '방이동' },
+  { id: 'g29', name: '쥬크박스', category: '바/맥주', rating: 4.4, price: '₩₩', distance: '방이동' },
 ];
